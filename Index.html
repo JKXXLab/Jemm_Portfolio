@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jemm Koh Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      overflow: hidden;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0073e6, #00a8ff);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .profile-image-container {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      overflow: hidden;
+      position: relative;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      animation: profileFloat 3s ease-in-out infinite;
+    }
+
+    .profile-image-container:hover {
+      transform: scale(1.05);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    @keyframes profileFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-image:hover {
+      transform: scale(1.1);
+    }
+
+    .profile-placeholder {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      text-align: center;
+      padding: 20px;
+      line-height: 1.4;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      animation: slideInDown 1s ease-out;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    header p {
+      font-size: 1.2em;
+      animation: fadeIn 1.5s ease-out;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header a {
+      color: #ffe;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    header a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    .nav-tabs {
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 10px;
+    }
+
+    .tab-button {
+      background: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 12px 24px;
+      margin: 5px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .tab-button:hover, .tab-button.active {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .section {
+      padding: 40px;
+      background: white;
+      margin: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.8s ease-out forwards;
+      transition: all 0.3s ease;
+    }
+
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    @keyframes slideUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .section.hidden {
+      display: none;
+    }
+
+    h2 {
+      color: #0073e6;
+      font-size: 2.2em;
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #0073e6, #00a8ff);
+      border-radius: 2px;
+    }
+
+    .job {
+      margin-bottom: 30px;
+      padding: 25px;
+      background: linear-gradient(135deg, #f8f9ff 0%, #e6f3ff 100%);
+      border-radius: 10px;
+      border-left: 4px solid #0073e6;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .job:hover {
+      transform: translateX(10px);
+      box-shadow: 0 5px 20px rgba(0, 115, 230, 0.2);
+    }
+
+    .job h3 {
+      color: #0073e6;
+      font-size: 1.3em;
+      margin-bottom: 5px;
+    }
+
+    .job > p {
+      color: #666;
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+
+    .job ul {
+      padding-left: 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .job.expanded ul {
+      max-height: 200px;
+    }
+
+    .job li {
+      margin-bottom: 8px;
+      color: #555;
+      transition: color 0.3s ease;
+    }
+
+    .job li:hover {
+      color: #0073e6;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .skill-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 0;
+    }
+
+    .skill-item:hover::before {
+      opacity: 0.1;
+    }
+
+    .skill-item:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .skill-name {
+      font-weight: 600;
+      font-size: 1.1em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .skill-level {
+      font-weight: 700;
+      font-size: 0.9em;
+      padding: 6px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .skill-item.expert {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+      color: white;
+    }
+
+    .skill-item.expert::before {
+      background: linear-gradient(135deg, #ff8787, #ff5252);
+    }
+
+    .skill-item.expert .skill-level {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .skill-item.advanced {
+      background: linear-gradient(135deg, #4ecdc4, #44a08d);
+      color: white;
+    }
+
+    .skill-item.advanced::before {
+      background: linear-gradient(135deg, #6ee6dd, #5cb3a6);
+    }
+
+    .skill-item.advanced .skill-level {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .skill-item.intermediate {
+      background: linear-gradient(135deg, #feca57, #ff9ff3);
+      color: white;
+    }
+
+    .skill-item.intermediate::before {
+      background: linear-gradient(135deg, #fed766, #ffa6ff);
+    }
+
+    .skill-item.intermediate .skill-level {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .certificates ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .certificates li {
+      background: linear-gradient(90deg, #00c851, #007e33);
+      color: white;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .certificates li:hover {
+      transform: translateX(10px);
+      box-shadow: 0 4px 15px rgba(0, 200, 81, 0.3);
+    }
+
+    .education-item {
+      background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #ff6b6b;
+      transition: all 0.3s ease;
+    }
+
+    .education-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 20px rgba(255, 107, 107, 0.2);
+    }
+
+    footer {
+      background: linear-gradient(135deg, #333, #555);
+      color: white;
+      text-align: center;
+      padding: 30px;
+      border-radius: 0 0 20px 20px;
+    }
+
+    footer a {
+      color: #00a8ff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #0073e6;
+    }
+
+    .floating-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, #0073e6, #00a8ff);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 115, 230, 0.3);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .floating-button:hover {
+      transform: scale(1.1) rotate(360deg);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 10px;
+        border-radius: 15px;
+      }
+      
+      header h1 {
+        font-size: 2em;
+      }
+
+      .profile-image-container {
+        width: 120px;
+        height: 120px;
+      }
+
+      .profile-placeholder {
+        font-size: 12px;
+        padding: 15px;
+      }
+      
+      .section {
+        margin: 10px;
+        padding: 20px;
+      }
+      
+      .nav-tabs {
+        flex-direction: column;
+      }
+      
+      .tab-button {
+        margin: 2px 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="profile-image-container">
+        <img src="" alt="Profile Picture" class="profile-image" style="display: none;">
+        <div class="profile-placeholder">Click here to add your professional photo</div>
+      </div>
+      <div class="header-content">
+        <h1>Jemm Koh</h1>
+        <p><a href="mailto:Jemmkoh04@gmail.com">Jemmkoh04@gmail.com</a> | Singapore</p>
+      </div>
+    </header>
+
+    <div class="nav-tabs">
+      <button class="tab-button active" onclick="showSection('experience')">Experience</button>
+      <button class="tab-button" onclick="showSection('education')">Education</button>
+      <button class="tab-button" onclick="showSection('skills')">Skills</button>
+      <button class="tab-button" onclick="showSection('certificates')">Certificates</button>
+    </div>
+
+    <section id="experience" class="section">
+      <h2>Experience</h2>
+      <div class="job" onclick="toggleJobDetails(this)">
+        <h3>Digital Marketing Intern – Web Designer & Front-End Support</h3>
+        <p>Go! Mama | Apr 2024 – Oct 2024</p>
+        <ul>
+          <li>Increased online engagement by 40% and conversions by 25%.</li>
+          <li>Designed and maintained responsive web pages (HTML, CSS, JS).</li>
+          <li>Created wireframes and prototypes using UI/UX principles.</li>
+          <li>Used Google Analytics and Meta Insights to optimize campaigns.</li>
+        </ul>
+      </div>
+      <div class="job" onclick="toggleJobDetails(this)">
+        <h3>Overseas Exchange Programme</h3>
+        <p>SCALE @ Chonburi | Jun 2023 – Jul 2023</p>
+        <ul>
+          <li>Built Arduino-based motion sensor lighting system for school safety.</li>
+          <li>Worked with international peers on real-world tech projects.</li>
+        </ul>
+      </div>
+      <div class="job" onclick="toggleJobDetails(this)">
+        <h3>Engineering Intern</h3>
+        <p>Duratech Engineering | Jun 2022 – Jan 2023</p>
+        <ul>
+          <li>Worked with military-grade wiring to meet exacting standards.</li>
+          <li>Documented production steps for quality and traceability.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="education" class="section hidden">
+      <h2>Education</h2>
+      <div class="education-item">
+        <p><strong>ITE (Higher Nitec) – Diploma in IT Application and Development</strong><br>2023 – 2025</p>
+        <ul>
+          <li>Learned full web dev cycle from wireframing to deployment.</li>
+          <li>Skilled in HTML, CSS, JavaScript, Adobe XD, Illustrator, Photoshop.</li>
+        </ul>
+      </div>
+      <div class="education-item">
+        <p><strong>ITE – Nitec in Aerospace Avionics</strong><br>2021 – 2023</p>
+        <ul>
+          <li>Interpreted complex electrical and wiring diagrams.</li>
+          <li>Hands-on experience with testing and circuit logic.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="skills" class="section hidden">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-item expert">
+          <span class="skill-name">Troubleshooting</span>
+          <span class="skill-level">Expert</span>
+        </div>
+        <div class="skill-item expert">
+          <span class="skill-name">Hardware</span>
+          <span class="skill-level">Expert</span>
+        </div>
+        <div class="skill-item expert">
+          <span class="skill-name">Software</span>
+          <span class="skill-level">Expert</span>
+        </div>
+        <div class="skill-item advanced">
+          <span class="skill-name">Communication</span>
+          <span class="skill-level">Advanced</span>
+        </div>
+        <div class="skill-item advanced">
+          <span class="skill-name">Interpersonal Skills</span>
+          <span class="skill-level">Advanced</span>
+        </div>
+        <div class="skill-item advanced">
+          <span class="skill-name">LAN</span>
+          <span class="skill-level">Advanced</span>
+        </div>
+        <div class="skill-item advanced">
+          <span class="skill-name">Printer Issues</span>
+          <span class="skill-level">Advanced</span>
+        </div>
+        <div class="skill-item advanced">
+          <span class="skill-name">Documentation</span>
+          <span class="skill-level">Advanced</span>
+        </div>
+        <div class="skill-item advanced">
+          <span class="skill-name">Network Infrastructure</span>
+          <span class="skill-level">Advanced</span>
+        </div>
+        <div class="skill-item advanced">
+          <span class="skill-name">Microsoft Office Suite</span>
+          <span class="skill-level">Advanced</span>
+        </div>
+        <div class="skill-item intermediate">
+          <span class="skill-name">WAN</span>
+          <span class="skill-level">Intermediate</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="certificates" class="section certificates hidden">
+      <h2>Certificates</h2>
+      <ul>
+        <li onclick="animateCertificate(this)">IBM – IT Fundamentals (Jun 2025)</li>
+        <li onclick="animateCertificate(this)">Microsoft Certified Professional (Since 2017)</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Jemm Koh | <a href="mailto:Jemmkoh04@gmail.com">Contact Me</a></p>
+    </footer>
+  </div>
+
+  <button class="floating-button" onclick="scrollToTop()" title="Back to Top">↑</button>
+
+  <script>
+    // Tab switching functionality
+    function showSection(sectionId) {
+      // Hide all sections
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        section.classList.add('hidden');
+      });
+      
+      // Show selected section
+      document.getElementById(sectionId).classList.remove('hidden');
+      
+      // Update active tab
+      const tabs = document.querySelectorAll('.tab-button');
+      tabs.forEach(tab => {
+        tab.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
+
+    // Job details toggle
+    function toggleJobDetails(jobElement) {
+      jobElement.classList.toggle('expanded');
+    }
+
+    // Certificate animation
+    function animateCertificate(element) {
+      element.style.transform = 'scale(1.05)';
+      setTimeout(() => {
+        element.style.transform = 'scale(1)';
+      }, 200);
+    }
+
+    // Scroll to top
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Initialize - expand first job by default
+    document.addEventListener('DOMContentLoaded', function() {
+      const firstJob = document.querySelector('.job');
+      if (firstJob) {
+        firstJob.classList.add('expanded');
+      }
+      
+      // Profile image upload functionality
+      const profileContainer = document.querySelector('.profile-image-container');
+      const profileImage = document.querySelector('.profile-image');
+      const profilePlaceholder = document.querySelector('.profile-placeholder');
+      
+      profileContainer.addEventListener('click', function() {
+        const input = document.createElement('input');
+        input.type = 'file';        
+        input.accept = 'image/*';
+        
+        input.onchange = function(e) {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              profileImage.src = e.target.result;
+              profileImage.style.display = 'block';
+              profilePlaceholder.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+          }
+        };
+        
+        input.click();
+      });
+      
+      // Animate sections on load
+      setTimeout(() => {
+        const sections = document.querySelectorAll('.section:not(.hidden)');
+        sections.forEach((section, index) => {
+          section.style.animationDelay = `${index * 0.2}s`;
+        });
+      }, 100);
+    });
+
+    // Add scroll reveal animation
+    window.addEventListener('scroll', function() {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollTop = window.scrollY;
+        
+        if (scrollTop > (sectionTop - windowHeight + sectionHeight/4)) {
+          section.style.animation = 'slideUp 0.8s ease-out forwards';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
